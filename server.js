@@ -10,6 +10,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+// ✅ Serve index.html on root "/"
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
 app.post('/chat', async (req, res) => {
   const { message } = req.body;
   if (!message) return res.status(400).json({ error: 'Message is required' });
